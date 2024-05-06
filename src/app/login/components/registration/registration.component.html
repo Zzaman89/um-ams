@@ -1,0 +1,44 @@
+<div [ngStyle.gt-lg]="{ width: '35vw' }" [ngStyle.gt-md]="{ width: '45vw' }" [ngStyle.md]="{ width: '55vw' }"
+  [ngStyle.xs]="{ width: '80vw' }" [ngStyle.sm]="{ width: '80vw' }">
+  <h1 class="text-align-center" mat-dialog-title>
+    Register
+  </h1>
+
+  <form name="registrationForm" #registrationForm="ngForm">
+    <mat-dialog-content class="mat-typography p-t-24">
+
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Username</mat-label>
+        <input matInput type="text" [(ngModel)]="user.username" #username="ngModel" name="username" required />
+      </mat-form-field>
+      <div *ngIf="username.touched">
+        <mat-error *ngIf="username.errors?.['required']">Username is a required.</mat-error>
+      </div>
+
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" [(ngModel)]="user.email" #email="ngModel" name="email" required email />
+      </mat-form-field>
+      <div *ngIf="email.touched">
+        <mat-error *ngIf="email.errors?.['required']">Email is a required.</mat-error>
+        <mat-error *ngIf="email.errors?.['email']">Please enter a valid email.</mat-error>
+      </div>
+
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Password</mat-label>
+        <input matInput type="password" [(ngModel)]="user.password" #password="ngModel" name="password" required />
+      </mat-form-field>
+      <div *ngIf="password.touched">
+        <mat-error *ngIf="password.errors?.['required']">Password is a required.</mat-error>
+      </div>
+
+    </mat-dialog-content>
+
+    <mat-dialog-actions class="p-t-16 p-b-16 p-l-20 p-r-20" fxLayout="row" fxLayoutAlign="space-between center">
+      <button mat-button mat-dialog-close>Close</button>
+      <button mat-raised-button color="primary" [disabled]="registrationForm.form.invalid || registerDisabled"
+        [class.spinner]="registerDisabled" (click)="register()">Register</button>
+    </mat-dialog-actions>
+  </form>
+
+</div>

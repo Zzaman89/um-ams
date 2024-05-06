@@ -1,0 +1,124 @@
+html,
+body {
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+}
+
+.mat-error {
+    font-size: 12px !important;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #84be6a;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.mat-button:hover {
+    background-color: #d8ffdc !important;
+}
+
+a {
+    color: #84be6a;
+    text-decoration: none;
+}
+
+.margin-0 {
+    margin: 0px;
+}
+
+.margin-bottom-0 {
+    margin-bottom: 0px;
+}
+
+.margin-top-20 {
+    margin-top: 20px;
+}
+
+.padding-0 {
+    padding: 0px;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.half-width {
+    width: 50%;
+}
+
+.quater-width {
+    width: 24%;
+}
+
+.text-bold {
+    font-weight: bold !important;
+}
+
+.text-italic {
+    font-style: italic !important;
+}
+
+.text-align-center {
+    text-align: center !important;
+}
+
+.text-strike {
+    text-decoration: line-through !important;
+}
+
+.text-ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.text-break-all {
+    word-break: break-all;
+}
+
+.text-upppercase {
+    text-transform: uppercase;
+}
+
+.text-capitalize {
+    text-transform: capitalize;
+}
+
+.cur-pointer {
+    cursor: pointer;
+}
+
+@keyframes spinner {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.spinner:before {
+    content: "";
+    box-sizing: border-box;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin-top: -10px;
+    margin-left: -10px;
+    border-radius: 50%;
+    border: 2px solid #ffffff;
+    border-top-color: #000000;
+    animation: spinner 0.8s linear infinite;
+}

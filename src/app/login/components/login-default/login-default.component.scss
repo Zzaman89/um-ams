@@ -1,0 +1,18 @@
+:host {
+  .login-bg-img {
+    background-image: url("./../../../../assets/background.jpg");
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .loginBox {
+    max-width: 90%;
+    width: 500px;
+  }
+
+  .login-container{
+    padding: 16px;
+  }
+}
