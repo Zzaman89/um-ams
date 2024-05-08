@@ -1,5 +1,5 @@
 export const environment = {
   production: false,
   TenantId: 'Test',
-  ApiBaseUrl: ''
+  ApiBaseUrl: 'http://localhost:4000'
 };

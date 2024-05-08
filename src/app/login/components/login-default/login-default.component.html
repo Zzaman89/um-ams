@@ -9,7 +9,7 @@
       <mat-card fxLayout="column" class="login-container">
         <mat-form-field appearance="outline">
           <mat-label>Username</mat-label>
-          <input matInput type="email" [(ngModel)]="user.email" #email="ngModel" name="username" (keyup.enter)="login()"
+          <input matInput type="email" [(ngModel)]="user.Email" #email="ngModel" name="username" (keyup.enter)="login()"
             required email />
         </mat-form-field>
         <div *ngIf="email.touched">
@@ -18,7 +18,7 @@
         </div>
         <mat-form-field appearance="outline">
           <mat-label>Password</mat-label>
-          <input matInput required type="password" [(ngModel)]="user.password" #pass="ngModel" name="password"
+          <input matInput required type="password" [(ngModel)]="user.Password" #pass="ngModel" name="password"
             (keyup.enter)="login()" />
         </mat-form-field>
         <div *ngIf="pass.touched">

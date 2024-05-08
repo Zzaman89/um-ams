@@ -19,10 +19,10 @@ export class NavigationGuard implements CanActivate {
     return new Observable(observer => {
       const redirectUrl = route._routerState.url;
 
-      const refreshToken = this.loginService.getCookies('refresh_token');
+      const accessToken = this.loginService.getCookies('access_token');
 
-      if (refreshToken) {
-        const userInfo = this.loginService.getDecodedAccessToken(refreshToken);
+      if (accessToken) {
+        const userInfo = this.loginService.getDecodedAccessToken(accessToken);
         const currentDate = new Date()
         const expiry = new Date(userInfo.exp * 1000);
         const isApplicationUser = expiry >= currentDate;
@@ -30,7 +30,6 @@ export class NavigationGuard implements CanActivate {
         if (isApplicationUser && redirectUrl !== '/login') {
           observer.next(true);
         } else if (!isApplicationUser) {
-          this.loginService.setCookie('refresh_token', "");
           this.loginService.setCookie('access_token', "");
           this.loginService.setCookie('user_id', "");
 

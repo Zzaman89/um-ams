@@ -25,6 +25,13 @@ export const routes: Route[] = [
     }
   },
   {
+    path: 'home',
+    loadChildren: () => import('../login/login.module').then(m => m.LoginModule),
+    canActivate: [NavigationGuard],
+    title: 'Home',
+    component: PageNotFoundComponent
+  },
+  {
     path: '404',
     component: PageNotFoundComponent
   },

@@ -20,8 +20,8 @@ export class LoginDefaultComponent {
   loginDisabled = false;
   isInactive: boolean = false;
   user: ILogin = {
-    email: '',
-    password: ''
+    Email: '',
+    Password: ''
   }
 
   constructor(
@@ -35,7 +35,7 @@ export class LoginDefaultComponent {
   login(): void {
     this.loginDisabled = true;
 
-    this.loginService.getToken('password', this.user).pipe(first()).subscribe(res => {
+    this.loginService.getToken(this.user).pipe(first()).subscribe(res => {
       if (res.error) {
         this.snackbarService.openSnackBar(res.error);
         this.loginDisabled = false;
@@ -44,11 +44,8 @@ export class LoginDefaultComponent {
 
       if (res) {
         const accessToken = res.token;
-        const refreshToken = res.token;
 
         this.loginService.setCookie('access_token', accessToken);
-        this.loginService.setCookie('refresh_token', refreshToken);
-
         localStorage.setItem('access_token', accessToken);
 
         const userInfo = this.loginService.getDecodedAccessToken(accessToken);

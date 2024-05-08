@@ -35,37 +35,13 @@ export class LoginService {
     document.cookie = `${type}=${value}`;
   }
 
-  getGetIdentity(): Observable<any> {
-    return this.http.get<any>(environment.ApiBaseUrl + '/GetIdentity', {});
-  }
-
-  getToken(granttype: string, user?: ILogin): Observable<any> {
+  getToken(user: ILogin): Observable<any> {
     return new Observable(observer => {
-      switch (granttype) {
-        case 'refresh_token':
-
-          const refreshTokenData = `client_id=${this.getCookies('client_id')}&client_secret=${this.getCookies('client_secret')}&grant_type=refresh_token&refresh_token=${this.getCookies('refresh_token')}`;
-          this.http.post<any>(environment.ApiBaseUrl + '/login', refreshTokenData, {
-            headers: {
-              'Content-Type': 'application/x-www-form-urlencoded',
-            }
-          }).pipe(first()).subscribe(res => {
-            observer.next(res);
-          }, error => {
-            observer.next(false);
-          });
-
-          break;
-        case 'password':
-          this.http.post<any>(environment.ApiBaseUrl + '/login', user).pipe(first()).subscribe(res => {
-            observer.next(res);
-          }, error => {
-            observer.next(error.error);
-          });
-          break;
-        default:
-          observer.next(false);
-      }
+      this.http.post<any>(environment.ApiBaseUrl + '/getToken', user).pipe(first()).subscribe(res => {
+        observer.next(res);
+      }, error => {
+        observer.next(error.error);
+      });
     });
   }
 
