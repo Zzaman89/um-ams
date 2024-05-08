@@ -25,11 +25,31 @@ export const routes: Route[] = [
     }
   },
   {
-    path: 'home',
-    loadChildren: () => import('../login/login.module').then(m => m.LoginModule),
+    path: 'admin-dashboard',
+    loadChildren: () => import('../admin/admin.module').then(m => m.AdminModule),
     canActivate: [NavigationGuard],
     title: 'Home',
-    component: PageNotFoundComponent
+    data: {
+      authFailedRedirection: authFailedRedirection,
+    }
+  },
+  {
+    path: 'assessor-dashboard',
+    loadChildren: () => import('../assessor/assessor.module').then(m => m.AssessorModule),
+    canActivate: [NavigationGuard],
+    title: 'Home',
+    data: {
+      authFailedRedirection: authFailedRedirection,
+    }
+  },
+  {
+    path: 'faculty-dashboard',
+    loadChildren: () => import('../faculty/faculty.module').then(m => m.FacultyModule),
+    canActivate: [NavigationGuard],
+    title: 'Home',
+    data: {
+      authFailedRedirection: authFailedRedirection,
+    }
   },
   {
     path: '404',
