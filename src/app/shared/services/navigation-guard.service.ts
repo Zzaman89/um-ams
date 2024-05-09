@@ -25,10 +25,18 @@ export class NavigationGuard implements CanActivate {
         const userInfo = this.loginService.getDecodedAccessToken(accessToken);
         const currentDate = new Date()
         const expiry = new Date(userInfo.exp * 1000);
-        const isApplicationUser = expiry >= currentDate;
+        const isTokenExpired = !(expiry >= currentDate);
+        const routeRole = route.data.role;
+        const userRole = userInfo.data.Role;
+        const isApplicationUser = !isTokenExpired && !!userRole;
 
         if (isApplicationUser && redirectUrl !== '/login') {
-          observer.next(true);
+          if (userRole === routeRole) {
+            observer.next(true);
+          } else {
+            this.router.navigate(['/404']);
+            observer.next(false);
+          }
         } else if (!isApplicationUser) {
           this.loginService.setCookie('access_token', "");
           this.loginService.setCookie('user_id', "");

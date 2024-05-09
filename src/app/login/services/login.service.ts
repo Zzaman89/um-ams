@@ -50,6 +50,19 @@ export class LoginService {
     return helper.decodeToken(token);
   }
 
+  getDefaultRouteForRole(role: string): string {
+    switch (role) {
+      case 'admin':
+        return '/admin-dashboard';
+      case 'faculty':
+        return '/faculty-dashboard';
+      case 'assessor':
+        return '/assessor-dashboard';
+      default:
+        return '/404';
+    }
+  }
+
   logout(): void {
     this.setCookie("refresh_token", "");
     this.setCookie("access_token", "");

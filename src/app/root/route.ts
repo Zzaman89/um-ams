@@ -28,8 +28,9 @@ export const routes: Route[] = [
     path: 'admin-dashboard',
     loadChildren: () => import('../admin/admin.module').then(m => m.AdminModule),
     canActivate: [NavigationGuard],
-    title: 'Home',
+    title: 'Admin - UM AMS',
     data: {
+      role: 'admin',
       authFailedRedirection: authFailedRedirection,
     }
   },
@@ -37,8 +38,9 @@ export const routes: Route[] = [
     path: 'assessor-dashboard',
     loadChildren: () => import('../assessor/assessor.module').then(m => m.AssessorModule),
     canActivate: [NavigationGuard],
-    title: 'Home',
+    title: 'Assessor - UM AMS',
     data: {
+      role: 'assessor',
       authFailedRedirection: authFailedRedirection,
     }
   },
@@ -46,8 +48,9 @@ export const routes: Route[] = [
     path: 'faculty-dashboard',
     loadChildren: () => import('../faculty/faculty.module').then(m => m.FacultyModule),
     canActivate: [NavigationGuard],
-    title: 'Home',
+    title: 'Faculty - UM AMS',
     data: {
+      role: 'faculty',
       authFailedRedirection: authFailedRedirection,
     }
   },

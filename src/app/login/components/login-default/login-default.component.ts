@@ -49,12 +49,15 @@ export class LoginDefaultComponent {
         localStorage.setItem('access_token', accessToken);
 
         const userInfo = this.loginService.getDecodedAccessToken(accessToken);
-        const userId = userInfo.id;
+        const userId = userInfo.data.id;
+        const role = userInfo.data.Role;
+        const isApplicationUser = userId && role ? true : false;
+        const defaultRoute = this.loginService.getDefaultRouteForRole(role);
+
         this.loginService.setCookie('user_id', userId);
-        const isApplicationUser = userId ? true : false;
 
         if (isApplicationUser) {
-          this.router.navigate(['/home']);
+          this.router.navigate([defaultRoute]);
         }
       }
 
