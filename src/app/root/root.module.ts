@@ -9,6 +9,7 @@ import { PageNotFoundComponent } from './component/page-not-found/page-not-found
 import { RootDefaultComponent } from './component/root-default/root-default.component';
 import { HttpRequestInterceptor } from './http-interceptor';
 import { routes } from './route';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { routes } from './route';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    CommonModule,
     MaterialModule,
     HttpClientModule,
     RouterModule.forRoot(routes, { initialNavigation: 'enabledNonBlocking' }),

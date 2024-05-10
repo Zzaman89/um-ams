@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter, map } from 'rxjs';
-import { LoginService } from '../../../login/services/login.service';
-import { environment } from './../../../../environments/environment';
 import { UtilityService } from '../../../shared/services/utility.service';
+import { LoginService } from '../../../login/services/login.service';
 
 @Component({
   selector: 'app-root-default',
@@ -11,17 +10,16 @@ import { UtilityService } from '../../../shared/services/utility.service';
   styleUrls: ['./root-default.component.scss']
 })
 export class RootDefaultComponent implements OnInit {
+  isLogin: boolean = false;
+  currentRoute: string = '/';
+  currentUserRoute: string[] = [];
+
   constructor(
     private loginService: LoginService,
     private router: Router,
     private route: ActivatedRoute,
     private utilityService: UtilityService
   ) { }
-
-  setRequiedCookcies(): void {
-    this.loginService.setCookie('client_id', "test_123");
-    this.loginService.setCookie('client_secret', "test_123");
-  }
 
   dynamicRouteTitleSetter(): void {
     this.router.events
@@ -42,13 +40,18 @@ export class RootDefaultComponent implements OnInit {
       });
   }
 
-  ngOnInit(): void {
-    const TenantId = this.loginService.getCookies('client_id');
+  logout(): void {
+    this.loginService.logout();
+  }
 
-    if (!TenantId) {
-      this.setRequiedCookcies();
-    } else if (TenantId !== environment.TenantId) {
-      this.setRequiedCookcies();
-    }
+  ngOnInit(): void {
+    this.router.events.subscribe(val => {
+      if (val instanceof NavigationEnd) {
+        this.isLogin = val.url === '/login' ? true : false;
+        this.currentRoute = val.url;
+        const userInfo = this.loginService.getDecodedAccessToken(this.loginService.getCookies('access_token'));
+        this.currentUserRoute = this.loginService.getAvailableRoutesForRole(userInfo.data.Role);
+      }
+    });
   }
 }

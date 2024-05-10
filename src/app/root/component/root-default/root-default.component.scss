@@ -1,0 +1,45 @@
+h2 {
+    margin: 20px;
+}
+
+.container {
+    position: absolute;
+    top: 60px;
+    bottom: 40px;
+    left: 0;
+    right: 0;
+}
+
+.sidenav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 350px;
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.card-container {
+    margin: 20px;
+    padding: 20px;
+}
+
+.card-container mat-card {
+    margin-bottom: 20px;
+}
+
+.application-container {
+    margin-top: 75px;
+    padding: 16px;
+    height: 100vh;
+}
+
+.login-container {
+    height: 100vh;
+    width: 100vw;
+}

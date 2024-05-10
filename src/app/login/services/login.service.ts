@@ -11,7 +11,6 @@ import { ILogin } from '../../core/models/login.model';
   providedIn: 'root'
 })
 export class LoginService {
-
   constructor(
     private http: HttpClient,
     private router: Router
@@ -60,6 +59,19 @@ export class LoginService {
         return '/assessor-dashboard';
       default:
         return '/404';
+    }
+  }
+
+  getAvailableRoutesForRole(role: string): Array<string> {
+    switch (role) {
+      case 'admin':
+        return ['users', 'meetings', 'reports'];
+      case 'faculty':
+        return ['meetings', 'reports'];
+      case 'assessor':
+        return ['meetings', 'reports'];
+      default:
+        return [];
     }
   }
 

@@ -1,1 +1,32 @@
-<router-outlet></router-outlet>
+<div fxFlex *ngIf="!isLogin">
+    <mat-toolbar class="header" yPosition="above" fxFlex="100">
+        <div fxFlex fxLayoutAlign="space-between center">
+            <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center">
+                <button mat-stroked-button *ngFor="let item of currentUserRoute"
+                    [color]="currentRoute === '/' + item ? 'primary' : ''">{{item}}</button>
+            </div>
+
+            <div>
+                <button mat-icon-button color="warn">
+                    <mat-icon>notifications</mat-icon>
+                </button>
+                <button mat-icon-button color="primary" [matMenuTriggerFor]="menu">
+                    <mat-icon>account_circle</mat-icon>
+                </button>
+
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item>Profile</button>
+                    <button mat-menu-item (click)="logout()">Logout</button>
+                </mat-menu>
+            </div>
+        </div>
+    </mat-toolbar>
+
+    <div class="application-container" fxFlex>
+        <router-outlet></router-outlet>
+    </div>
+</div>
+
+<div class="login-container" *ngIf="isLogin">
+    <router-outlet></router-outlet>
+</div>
