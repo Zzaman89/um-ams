@@ -16,7 +16,7 @@ export class HttpRequestInterceptor implements HttpInterceptor {
 
     req = req.clone({
       withCredentials: false,
-      headers: req.headers.set('X-Jwt-Token', `Bearer ${token}`)
+      headers: req.headers.set('Authorization', `Bearer ${token}`)
     });
 
     return next.handle(req);

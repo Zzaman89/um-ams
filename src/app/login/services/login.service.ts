@@ -52,7 +52,7 @@ export class LoginService {
   getDefaultRouteForRole(role: string): string {
     switch (role) {
       case 'admin':
-        return '/admin-dashboard';
+        return '/admin-dashboard/users';
       case 'faculty':
         return '/faculty-dashboard';
       case 'assessor':
