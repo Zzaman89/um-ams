@@ -21,4 +21,19 @@ export class UserService {
       });
     });
   }
+
+  createuser(Name: string, Email: string, Password: string, Role: string): Observable<any> {
+    return new Observable(observer => {
+      this.http.post<CommonHttpResponse<Array<IUser>>>(environment.ApiBaseUrl + '/createUser', {
+        Name: Name,
+        Email: Email,
+        Password: Password,
+        Role: Role
+      }).pipe(first()).subscribe(res => {
+        observer.next(res.Data);
+      }, error => {
+        observer.next(error.error);
+      });
+    });
+  }
 }

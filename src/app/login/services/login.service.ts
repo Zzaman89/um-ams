@@ -76,7 +76,6 @@ export class LoginService {
   }
 
   logout(): void {
-    this.setCookie("refresh_token", "");
     this.setCookie("access_token", "");
     this.setCookie("user_id", "");
 

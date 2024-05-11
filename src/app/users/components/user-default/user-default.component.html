@@ -2,11 +2,11 @@
     <div fxFlex fxLayoutAlign="space-between center">
         <h1>Users</h1>
 
-        <button mat-flat-button color="primary">Create users</button>
+        <button mat-flat-button color="primary" (click)="openUserCreateModal()">Create users</button>
     </div>
 
 
-    <div  class="m-t-18">
+    <div class="m-t-18">
         <table mat-table [dataSource]="data" class="mat-elevation-z2">
             <ng-container matColumnDef="Name">
                 <th mat-header-cell *matHeaderCellDef> Name </th>

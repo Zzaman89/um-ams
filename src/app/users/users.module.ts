@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { UserDefaultComponent } from './components/user-default/user-default.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule } from '../shared/material.module';
+import { UserCreateComponent } from './components/user-create/user-create.component';
 
 const routes: Routes = [
   {
@@ -15,7 +16,8 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    UserDefaultComponent
+    UserDefaultComponent,
+    UserCreateComponent
   ],
   imports: [
     CommonModule,
