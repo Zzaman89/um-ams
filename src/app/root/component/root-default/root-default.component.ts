@@ -47,7 +47,7 @@ export class RootDefaultComponent implements OnInit {
   ngOnInit(): void {
     this.router.events.subscribe(val => {
       if (val instanceof NavigationEnd) {
-        this.isLogin = val.url === '/login' ? true : false;
+        this.isLogin = val.url === '/login' || val.urlAfterRedirects === '/login' ? true : false;
         this.currentRoute = val.url;
         const userInfo = this.loginService.getDecodedAccessToken(this.loginService.getCookies('access_token'));
         this.currentUserRoute = this.loginService.getAvailableRoutesForRole(userInfo.data.Role);
