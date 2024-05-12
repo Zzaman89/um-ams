@@ -19,18 +19,27 @@ export class UserDefaultComponent implements OnInit {
     public dialog: MatDialog
   ) { }
 
+  getUsers(): void {
+    this.userService.getUsers().pipe(first()).subscribe(res => {
+      this.data = res;
+    });
+  }
+
   openUserCreateModal(): void {
-    this.dialog.open(UserCreateComponent, {
+    const ref = this.dialog.open(UserCreateComponent, {
       width: '40vw',
       enterAnimationDuration: '100ms',
       exitAnimationDuration: '100ms'
     });
+
+
+    ref.afterClosed().subscribe(_ => {
+      this.getUsers();
+    });
   }
 
   ngOnInit(): void {
-    this.userService.getUsers().pipe(first()).subscribe(res => {
-      this.data = res;
-    });
+    this.getUsers();
   }
 
 }

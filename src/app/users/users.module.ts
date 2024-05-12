@@ -5,6 +5,7 @@ import { UserDefaultComponent } from './components/user-default/user-default.com
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule } from '../shared/material.module';
 import { UserCreateComponent } from './components/user-create/user-create.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {
@@ -23,6 +24,7 @@ const routes: Routes = [
     CommonModule,
     FlexLayoutModule,
     MaterialModule,
+    ReactiveFormsModule,
     RouterModule.forChild(routes)
   ]
 })
