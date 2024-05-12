@@ -36,4 +36,19 @@ export class UserService {
       });
     });
   }
+
+  updateUser(UserId: string, Name: string, Email: string, Role: string): Observable<any> {
+    return new Observable(observer => {
+      this.http.post<CommonHttpResponse<IUser>>(environment.ApiBaseUrl + '/updateUser', {
+        id: UserId,
+        Name: Name,
+        Email: Email,
+        Role: Role
+      }).pipe(first()).subscribe(res => {
+        observer.next(res);
+      }, error => {
+        observer.next(error.error);
+      });
+    });
+  }
 }

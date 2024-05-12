@@ -4,6 +4,7 @@ import { first } from 'rxjs';
 import { IUser } from '../../../core/models/user.model';
 import { UserService } from '../../services/user.service';
 import { UserCreateComponent } from '../user-create/user-create.component';
+import { UserUpdateComponent } from '../user-update/user-update.component';
 
 @Component({
   selector: 'app-user-default',
@@ -12,7 +13,7 @@ import { UserCreateComponent } from '../user-create/user-create.component';
 })
 export class UserDefaultComponent implements OnInit {
   data: IUser[] = [];
-  displayedColumns: string[] = ['Name', 'Email', 'Role'];
+  displayedColumns: string[] = ['Name', 'Email', 'Role', 'Actions'];
 
   constructor(
     private userService: UserService,
@@ -32,6 +33,19 @@ export class UserDefaultComponent implements OnInit {
       exitAnimationDuration: '100ms'
     });
 
+
+    ref.afterClosed().subscribe(_ => {
+      this.getUsers();
+    });
+  }
+
+  openUpdateUserModal(user: IUser): void {
+    const ref = this.dialog.open(UserUpdateComponent, {
+      data: user,
+      width: '40vw',
+      enterAnimationDuration: '100ms',
+      exitAnimationDuration: '100ms'
+    });
 
     ref.afterClosed().subscribe(_ => {
       this.getUsers();

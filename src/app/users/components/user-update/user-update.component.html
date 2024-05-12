@@ -1,0 +1,34 @@
+<h2 mat-dialog-title>Update user</h2>
+<mat-dialog-content>
+    <form [formGroup]="userForm">
+        <mat-form-field style="width: 100%;">
+            <mat-label>Name</mat-label>
+            <input matInput formControlName="name">
+        </mat-form-field>
+
+        <mat-form-field style="width: 100%;">
+            <mat-label>Email</mat-label>
+            <input matInput type="email" formControlName="email">
+        </mat-form-field>
+
+        <mat-form-field style="width: 100%;">
+            <mat-label>Role</mat-label>
+            <mat-select formControlName="role">
+                <mat-option value="admin">Admin</mat-option>
+                <mat-option value="faculty">Faculty</mat-option>
+                <mat-option value="assesor">Assesor</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <div fxLayoutAlign="space-between center" fxFlex>
+        <button mat-button mat-dialog-close>Close</button>
+        <button mat-raised-button color="primary" (click)="updateUser()" [disabled]="!userForm.valid || isLoading">
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+                <span>Update user</span>
+                <mat-spinner diameter="20" *ngIf="isLoading"></mat-spinner>
+            </div>
+        </button>
+    </div>
+</mat-dialog-actions>

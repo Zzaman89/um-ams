@@ -6,6 +6,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule } from '../shared/material.module';
 import { UserCreateComponent } from './components/user-create/user-create.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { UserUpdateComponent } from './components/user-update/user-update.component';
 
 const routes: Routes = [
   {
@@ -18,7 +19,8 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     UserDefaultComponent,
-    UserCreateComponent
+    UserCreateComponent,
+    UserUpdateComponent
   ],
   imports: [
     CommonModule,
