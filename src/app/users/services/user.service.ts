@@ -51,4 +51,16 @@ export class UserService {
       });
     });
   }
+
+  deleteUser(UserId: string): Observable<any> {
+    return new Observable(observer => {
+      this.http.post<CommonHttpResponse<IUser>>(environment.ApiBaseUrl + '/deleteUser', {
+        id: UserId
+      }).pipe(first()).subscribe(res => {
+        observer.next(res);
+      }, error => {
+        observer.next(error.error);
+      });
+    });
+  }
 }

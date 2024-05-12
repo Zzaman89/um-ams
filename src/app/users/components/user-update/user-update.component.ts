@@ -12,7 +12,7 @@ import { first } from 'rxjs';
   templateUrl: './user-update.component.html',
   styleUrl: './user-update.component.scss'
 })
-export class UserUpdateComponent implements OnInit {
+export class UserUpdateComponent {
   isLoading: boolean = false;
 
   userForm = new FormGroup({
@@ -23,7 +23,7 @@ export class UserUpdateComponent implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: IUser,
-    public dialogRef: MatDialogRef<UserCreateComponent>,
+    public dialogRef: MatDialogRef<UserUpdateComponent>,
     private userService: UserService,
     private snackBar: MatSnackBar
   ) { }
@@ -57,9 +57,5 @@ export class UserUpdateComponent implements OnInit {
 
       this.dialogRef.close();
     });
-  }
-
-  ngOnInit(): void {
-    console.log(this.data);
   }
 }

@@ -5,6 +5,7 @@ import { IUser } from '../../../core/models/user.model';
 import { UserService } from '../../services/user.service';
 import { UserCreateComponent } from '../user-create/user-create.component';
 import { UserUpdateComponent } from '../user-update/user-update.component';
+import { UserDeleteComponent } from '../user-delete/user-delete.component';
 
 @Component({
   selector: 'app-user-default',
@@ -41,6 +42,19 @@ export class UserDefaultComponent implements OnInit {
 
   openUpdateUserModal(user: IUser): void {
     const ref = this.dialog.open(UserUpdateComponent, {
+      data: user,
+      width: '40vw',
+      enterAnimationDuration: '100ms',
+      exitAnimationDuration: '100ms'
+    });
+
+    ref.afterClosed().subscribe(_ => {
+      this.getUsers();
+    });
+  }
+
+  openDeleteUserModal(user: IUser): void {
+    const ref = this.dialog.open(UserDeleteComponent, {
       data: user,
       width: '40vw',
       enterAnimationDuration: '100ms',

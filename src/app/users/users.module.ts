@@ -7,6 +7,7 @@ import { MaterialModule } from '../shared/material.module';
 import { UserCreateComponent } from './components/user-create/user-create.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UserUpdateComponent } from './components/user-update/user-update.component';
+import { UserDeleteComponent } from './components/user-delete/user-delete.component';
 
 const routes: Routes = [
   {
@@ -20,7 +21,8 @@ const routes: Routes = [
   declarations: [
     UserDefaultComponent,
     UserCreateComponent,
-    UserUpdateComponent
+    UserUpdateComponent,
+    UserDeleteComponent
   ],
   imports: [
     CommonModule,
