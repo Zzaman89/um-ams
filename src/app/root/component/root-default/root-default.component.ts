@@ -44,6 +44,12 @@ export class RootDefaultComponent implements OnInit {
     this.loginService.logout();
   }
 
+  routeTo(to: string): void {
+    const userInfo = this.loginService.getDecodedAccessToken(this.loginService.getCookies('access_token'))
+
+    this.router.navigate([`${userInfo.data.Role}-dashboard/${to}`]);
+  }
+
   ngOnInit(): void {
     this.router.events.subscribe(val => {
       if (val instanceof NavigationEnd) {
