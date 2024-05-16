@@ -18,6 +18,9 @@ import {
 } from 'date-fns';
 import { Subject, first } from 'rxjs';
 import { MeetingService, Months } from '../../services/meeting.service';
+import { MatDialog } from '@angular/material/dialog';
+import { MeetingDetailsComponent } from '../meeting-details/meeting-details.component';
+import { IMeeting } from '../../../core/models/meeting.model';
 
 @Component({
   selector: 'app-meeting-list',
@@ -31,8 +34,29 @@ export class MeetingListComponent implements OnInit, OnChanges {
   viewDate: Date = new Date();
   events: CalendarEvent[] = [];
   activeDayIsOpen: boolean = true;
+  actions: CalendarEventAction[] = [
+    {
+      label: 'Edit',
+      a11yLabel: 'Edit',
+      cssClass: 'action-red',
+      onClick: ({ event }: { event: CalendarEvent }): void => {
+        this.handleEvent('Details', event);
+      },
+    },
+    {
+      label: 'Delete',
+      a11yLabel: 'Delete',
+      cssClass: 'action-blue',
+      onClick: ({ event }: { event: CalendarEvent }): void => {
+        this.handleEvent('Deleted', event);
+      },
+    },
+  ];
 
-  constructor(private meetingService: MeetingService) { }
+  constructor(
+    private meetingService: MeetingService,
+    public dialog: MatDialog
+  ) { }
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {
@@ -48,7 +72,15 @@ export class MeetingListComponent implements OnInit, OnChanges {
     }
   }
 
-  handleEvent(action: string, event: CalendarEvent): void { }
+  handleEvent(action: string, event: CalendarEvent): void {
+    switch (action) {
+      case 'Clicked':
+        this.openMeetingDetailsModal(event.meta);
+        return;
+      default:
+        console.log("Action doesn't exist");
+    }
+  }
 
   addEvent(): void { }
 
@@ -66,10 +98,21 @@ export class MeetingListComponent implements OnInit, OnChanges {
           return {
             start: new Date(x.StartingDate),
             end: new Date(x.EndingDate),
-            title: x.Title
+            title: x.Title,
+            meta: x,
+            actions: this.actions
           }
         });
       });
+  }
+
+  openMeetingDetailsModal(data: IMeeting): void {
+    this.dialog.open(MeetingDetailsComponent, {
+      data: data,
+      width: '40vw',
+      enterAnimationDuration: '100ms',
+      exitAnimationDuration: '100ms'
+    });
   }
 
   ngOnChanges(changes: SimpleChanges): void {

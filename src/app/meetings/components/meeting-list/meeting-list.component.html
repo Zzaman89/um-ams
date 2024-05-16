@@ -5,7 +5,8 @@
             <mat-icon>chevron_left</mat-icon>
         </button>
 
-        <button mat-icon-button color="primary" mwlCalendarToday view="month" [(viewDate)]="viewDate">
+        <button mat-icon-button color="primary" mwlCalendarToday view="month" [(viewDate)]="viewDate"
+            (viewDateChange)="closeOpenMonthViewDay()">
             <mat-icon>calendar_today</mat-icon>
         </button>
 

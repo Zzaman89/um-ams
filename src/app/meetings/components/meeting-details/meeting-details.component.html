@@ -1,0 +1,49 @@
+<h2 mat-dialog-title>{{data.Title}}</h2>
+<mat-dialog-content>
+    <div>
+        <sub>Description</sub>
+        <p>{{data.Description}}</p>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+        <div fxFlex="45">
+            <sub>Start Date</sub>
+            <p>{{data.StartingDate | date: 'DD MMM, YYYY'}}</p>
+        </div>
+
+
+        <div fxFlex="45">
+            <sub>End Date</sub>
+            <p>{{data.EndingDate | date: 'DD MMM, YYYY'}}</p>
+        </div>
+    </div>
+
+    <div class="m-b-10" fxLayout="column">
+        <div fxFlex="100">
+            <sub>Meeting Host</sub>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="start center">
+            <ngx-avatars [name]="data.CreatedByUserName" size="25"></ngx-avatars>
+            <p class="m-0 p-l-10">{{data.CreatedByUserName}}</p>
+        </div>
+    </div>
+
+    <div class="m-b-10" fxLayout="column">
+        <div fxFlex="100">
+            <sub>Invited Users</sub>
+        </div>
+
+        <div fxLayout="row wrap">
+            <div fxFlex="45%" *ngFor="let item of data.InvitedUsers" fxLayoutAlign="start center" class="m-b-10">
+                <ngx-avatars [name]="item.UserName" size="25"></ngx-avatars>
+                <p class="m-0 p-l-10">{{item.UserName}}</p>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <sub>Meeting Link</sub>
+        <p>{{data.MeetingLink}}</p>
+    </div>
+</mat-dialog-content>
