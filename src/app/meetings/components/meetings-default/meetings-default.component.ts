@@ -8,6 +8,8 @@ import { MeetingCreateComponent } from '../meeting-create/meeting-create.compone
   styleUrl: './meetings-default.component.scss'
 })
 export class MeetingsDefaultComponent {
+  refresh: boolean = false;
+
   constructor(
     public dialog: MatDialog
   ) { }
@@ -20,6 +22,12 @@ export class MeetingsDefaultComponent {
     });
 
 
-    ref.afterClosed().subscribe(_ => { });
+    ref.afterClosed().subscribe(_ => {
+      this.refresh = true;
+
+      setTimeout(() => {
+        this.refresh = false;
+      }, 2000);
+    });
   }
 }

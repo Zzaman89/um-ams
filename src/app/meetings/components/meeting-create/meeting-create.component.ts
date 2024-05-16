@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MeetingService } from '../../services/meeting.service';
-import { IMeeting } from '../../../core/models/meeting.model';
 import { first } from 'rxjs';
-import { UserService } from '../../../users/services/user.service';
+import { IMeeting } from '../../../core/models/meeting.model';
 import { IUser } from '../../../core/models/user.model';
+import { UserService } from '../../../users/services/user.service';
+import { MeetingService } from '../../services/meeting.service';
 
 @Component({
   selector: 'app-meeting-create',
