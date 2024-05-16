@@ -17,7 +17,7 @@ import {
   addHours,
 } from 'date-fns';
 import { Subject, first } from 'rxjs';
-import { MeetingService } from '../../services/meeting.service';
+import { MeetingService, Months } from '../../services/meeting.service';
 
 @Component({
   selector: 'app-meeting-list',
@@ -48,32 +48,19 @@ export class MeetingListComponent implements OnInit, OnChanges {
     }
   }
 
-  eventTimesChanged({ event, newStart, newEnd, }: CalendarEventTimesChangedEvent): void {
-    this.events = this.events.map((iEvent) => {
-      if (iEvent === event) {
-        return {
-          ...event,
-          start: newStart,
-          end: newEnd,
-        };
-      }
-      return iEvent;
-    });
-    this.handleEvent('Dropped or resized', event);
-  }
-
   handleEvent(action: string, event: CalendarEvent): void { }
 
   addEvent(): void { }
 
   deleteEvent(eventToDelete: CalendarEvent) { }
 
-  setView(view: CalendarView) { }
+  closeOpenMonthViewDay() {
+    this.getMeetings(this.viewDate.getFullYear(), this.viewDate.getMonth());
+    this.activeDayIsOpen = false;
+  }
 
-  closeOpenMonthViewDay() { }
-
-  getMeetings(): void {
-    this.meetingService.getMeetings(this.viewDate.getFullYear(), this.viewDate.getMonth())
+  getMeetings(year: number = this.viewDate.getFullYear(), month: Months = this.viewDate.getMonth()): void {
+    this.meetingService.getMeetings(year, month)
       .pipe(first()).subscribe(res => {
         this.events = res.Data.map(x => {
           return {
