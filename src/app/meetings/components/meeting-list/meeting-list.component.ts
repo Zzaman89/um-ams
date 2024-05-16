@@ -21,6 +21,7 @@ import { MeetingService, Months } from '../../services/meeting.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MeetingDetailsComponent } from '../meeting-details/meeting-details.component';
 import { IMeeting } from '../../../core/models/meeting.model';
+import { MeetingEditComponent } from '../meeting-edit/meeting-edit.component';
 
 @Component({
   selector: 'app-meeting-list',
@@ -40,7 +41,7 @@ export class MeetingListComponent implements OnInit, OnChanges {
       a11yLabel: 'Edit',
       cssClass: 'action-red',
       onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.handleEvent('Details', event);
+        this.handleEvent('Edit', event);
       },
     },
     {
@@ -77,6 +78,9 @@ export class MeetingListComponent implements OnInit, OnChanges {
       case 'Clicked':
         this.openMeetingDetailsModal(event.meta);
         return;
+      case 'Edit':
+        this.openMeetingEditModal(event.meta);
+        return;
       default:
         console.log("Action doesn't exist");
     }
@@ -103,11 +107,22 @@ export class MeetingListComponent implements OnInit, OnChanges {
             actions: this.actions
           }
         });
+
+        this.refresh.next();
       });
   }
 
   openMeetingDetailsModal(data: IMeeting): void {
     this.dialog.open(MeetingDetailsComponent, {
+      data: data,
+      width: '40vw',
+      enterAnimationDuration: '100ms',
+      exitAnimationDuration: '100ms'
+    });
+  }
+
+  openMeetingEditModal(data: IMeeting): void {
+    this.dialog.open(MeetingEditComponent, {
       data: data,
       width: '40vw',
       enterAnimationDuration: '100ms',

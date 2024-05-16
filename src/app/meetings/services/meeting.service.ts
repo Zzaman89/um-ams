@@ -36,6 +36,16 @@ export class MeetingService {
     });
   }
 
+  updateMeeting(data: IMeeting): Observable<CommonHttpResponse<IMeeting>> {
+    return new Observable(observer => {
+      this.http.post<CommonHttpResponse<IMeeting>>(environment.ApiBaseUrl + '/updateMeeting', data).pipe(first()).subscribe(res => {
+        observer.next(res);
+      }, error => {
+        observer.next(error.error);
+      });
+    });
+  }
+
   getMeetings(year: number, month: Months): Observable<CommonHttpResponse<IMeeting[]>> {
     const monthDateRange = this.getStartAndEndDate(year, month);
     const data = {

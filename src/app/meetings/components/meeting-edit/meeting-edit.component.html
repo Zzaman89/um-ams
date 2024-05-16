@@ -1,0 +1,56 @@
+<h2 mat-dialog-title>Update meeting</h2>
+<mat-dialog-content>
+    <form [formGroup]="meetingForm">
+        <mat-form-field style="width: 100%;">
+            <mat-label>Title</mat-label>
+            <input matInput formControlName="title">
+        </mat-form-field>
+
+        <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
+            <mat-form-field style="width: 50%">
+                <mat-label>Start Date</mat-label>
+                <input matInput [matDatepicker]="startPicker" formControlName="startingDate" [min]="today"
+                    [max]="meetingForm.value['endingDate']">
+                <mat-datepicker-toggle matIconSuffix [for]="startPicker"></mat-datepicker-toggle>
+                <mat-datepicker #startPicker></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field style="width: 50%">
+                <mat-label>End Date</mat-label>
+                <input matInput [matDatepicker]="endPicker" formControlName="endingDate"
+                    [min]="meetingForm.value['startingDate']">
+                <mat-datepicker-toggle matIconSuffix [for]="endPicker"></mat-datepicker-toggle>
+                <mat-datepicker #endPicker></mat-datepicker>
+            </mat-form-field>
+        </div>
+
+        <mat-form-field style="width: 100%;">
+            <mat-label>Participants</mat-label>
+            <mat-select matNativeControl multiple formControlName="invitedUsers">
+                <mat-option *ngFor="let item of users" [value]="item">{{item.Name}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field style="width: 100%;">
+            <mat-label>Description</mat-label>
+            <textarea matInput formControlName="description"></textarea>
+        </mat-form-field>
+
+        <mat-form-field style="width: 100%;">
+            <mat-label>Meeting Link</mat-label>
+            <input matInput formControlName="meetingLink">
+        </mat-form-field>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <div fxLayoutAlign="space-between center" fxFlex>
+        <button mat-button mat-dialog-close>Close</button>
+        <button mat-raised-button color="primary" (click)="updateMeeting()"
+            [disabled]="!meetingForm.valid || isLoading">
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+                <span>Update Meeting</span>
+                <mat-spinner diameter="20" *ngIf="isLoading"></mat-spinner>
+            </div>
+        </button>
+    </div>
+</mat-dialog-actions>
