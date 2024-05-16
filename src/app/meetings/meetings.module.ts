@@ -12,6 +12,7 @@ import { MeetingDetailsComponent } from './components/meeting-details/meeting-de
 import { MeetingListComponent } from './components/meeting-list/meeting-list.component';
 import { MeetingsDefaultComponent } from './components/meetings-default/meetings-default.component';
 import { MeetingEditComponent } from './components/meeting-edit/meeting-edit.component';
+import { MeetingDeleteComponent } from './components/meeting-delete/meeting-delete.component';
 
 const routes: Routes = [
   {
@@ -26,7 +27,8 @@ const routes: Routes = [
     MeetingCreateComponent,
     MeetingListComponent,
     MeetingDetailsComponent,
-    MeetingEditComponent
+    MeetingEditComponent,
+    MeetingDeleteComponent
   ],
   imports: [
     AvatarModule,

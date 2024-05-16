@@ -22,6 +22,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MeetingDetailsComponent } from '../meeting-details/meeting-details.component';
 import { IMeeting } from '../../../core/models/meeting.model';
 import { MeetingEditComponent } from '../meeting-edit/meeting-edit.component';
+import { MeetingDeleteComponent } from '../meeting-delete/meeting-delete.component';
 
 @Component({
   selector: 'app-meeting-list',
@@ -49,7 +50,7 @@ export class MeetingListComponent implements OnInit, OnChanges {
       a11yLabel: 'Delete',
       cssClass: 'action-blue',
       onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.handleEvent('Deleted', event);
+        this.handleEvent('Delete', event);
       },
     },
   ];
@@ -80,6 +81,9 @@ export class MeetingListComponent implements OnInit, OnChanges {
         return;
       case 'Edit':
         this.openMeetingEditModal(event.meta);
+        return;
+      case 'Delete':
+        this.openMeetingDeleteModal(event.meta);
         return;
       default:
         console.log("Action doesn't exist");
@@ -123,6 +127,15 @@ export class MeetingListComponent implements OnInit, OnChanges {
 
   openMeetingEditModal(data: IMeeting): void {
     this.dialog.open(MeetingEditComponent, {
+      data: data,
+      width: '40vw',
+      enterAnimationDuration: '100ms',
+      exitAnimationDuration: '100ms'
+    });
+  }
+
+  openMeetingDeleteModal(data: IMeeting): void {
+    this.dialog.open(MeetingDeleteComponent, {
       data: data,
       width: '40vw',
       enterAnimationDuration: '100ms',

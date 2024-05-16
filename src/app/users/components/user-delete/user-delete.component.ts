@@ -27,7 +27,7 @@ export class UserDeleteComponent {
       this.isLoading = false;
 
       if (!res.IsValid) {
-        this.snackBar.open('Couldn\'t update user.', undefined, {
+        this.snackBar.open('Couldn\'t delete user.', undefined, {
           duration: 2000,
           horizontalPosition: 'right',
           verticalPosition: 'top'
@@ -35,7 +35,7 @@ export class UserDeleteComponent {
       }
 
       if (res.IsValid) {
-        this.snackBar.open('User updated successfully', undefined, {
+        this.snackBar.open('User deleted successfully', undefined, {
           duration: 2000,
           horizontalPosition: 'right',
           verticalPosition: 'top'
