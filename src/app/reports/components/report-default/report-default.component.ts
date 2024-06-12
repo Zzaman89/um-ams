@@ -41,6 +41,10 @@ export class ReportDefaultComponent implements OnInit {
     });
   }
 
+  openDetailsReportModal(report: IReport): void {
+
+  }
+
   openUpdateReportModal(report: IReport): void {
 
   }
