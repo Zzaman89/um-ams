@@ -1,0 +1,37 @@
+<h2 mat-dialog-title>New Report</h2>
+<mat-dialog-content>
+    <form [formGroup]="reportForm">
+        <mat-form-field style="width: 100%;">
+            <mat-label>Title</mat-label>
+            <input matInput formControlName="title">
+        </mat-form-field>
+
+        <mat-form-field style="width: 100%;">
+            <mat-label>Assessor</mat-label>
+            <mat-select matNativeControl formControlName="requestedAssessor">
+                <mat-option *ngFor="let item of users" [value]="item">{{item.Name}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field style="width: 100%;">
+            <mat-label>Description</mat-label>
+            <textarea matInput formControlName="description"></textarea>
+        </mat-form-field>
+
+        <mat-form-field style="width: 100%;">
+            <mat-label>Report File Link</mat-label>
+            <input matInput formControlName="fileLink">
+        </mat-form-field>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <div fxLayoutAlign="space-between center" fxFlex>
+        <button mat-button mat-dialog-close>Close</button>
+        <button mat-raised-button color="primary" (click)="createReport()" [disabled]="!reportForm.valid || isLoading">
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+                <span>Create Report</span>
+                <mat-spinner diameter="20" *ngIf="isLoading"></mat-spinner>
+            </div>
+        </button>
+    </div>
+</mat-dialog-actions>

@@ -5,6 +5,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../shared/material.module';
 import { ReportDefaultComponent } from './components/report-default/report-default.component';
+import { ReportCreateComponent } from './components/report-create/report-create.component';
 
 
 const routes: Routes = [
@@ -16,7 +17,8 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    ReportDefaultComponent
+    ReportDefaultComponent,
+    ReportCreateComponent
   ],
   imports: [
     CommonModule,

@@ -21,4 +21,15 @@ export class ReportService {
       });
     });
   }
+
+  createReport(data: IReport): Observable<CommonHttpResponse<IReport>> {
+    return new Observable(observer => {
+      this.http.post<CommonHttpResponse<IReport>>(environment.ApiBaseUrl + '/createReport', data).pipe(first()).subscribe(res => {
+        observer.next(res);
+      }, error => {
+        observer.next(error.error);
+      });
+    });
+  }
+
 }
