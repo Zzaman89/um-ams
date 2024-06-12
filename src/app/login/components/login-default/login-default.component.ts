@@ -42,7 +42,7 @@ export class LoginDefaultComponent {
         return;
       }
 
-      if (res) {
+      if (res.IsValid) {
         const accessToken = res.token;
 
         this.loginService.setCookie('access_token', accessToken);
@@ -59,6 +59,8 @@ export class LoginDefaultComponent {
         if (isApplicationUser) {
           this.router.navigate([defaultRoute]);
         }
+      } else {
+        this.snackbarService.openSnackBar("User name or password incorrect");
       }
 
       this.loginDisabled = false;
