@@ -1,0 +1,32 @@
+<div fxFlex fxLayout="column">
+    <div fxFlex fxLayoutAlign="space-between center">
+        <div fxLayout="column">
+
+
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <button mat-icon-button color="primary" matTooltip="back" (click)="location.back()">
+                    <mat-icon>chevron_left</mat-icon>
+                </button>
+                <h1 class="m-b-0">{{data.Title}}</h1>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <button mat-icon-button color="warn" matTooltip="Update report Status">
+                    <mat-icon>info</mat-icon>
+                </button>
+                <h3 class="report-status">{{data.Status}}</h3>
+            </div>
+        </div>
+
+        <div>
+            <button mat-icon-button color="primary" (click)="updateReport()">
+                <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="deleteReport()">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </div>
+    </div>
+
+    <mat-divider></mat-divider>
+</div>

@@ -1,0 +1,36 @@
+<div fxFlex fxLayout="column">
+    <div fxFlex fxLayoutAlign="space-between center">
+        <h1>Reports</h1>
+
+        <button mat-flat-button color="primary" (click)="openReportCreateModal()">New report</button>
+    </div>
+
+
+    <div class="m-t-18">
+        <table mat-table [dataSource]="data" class="mat-elevation-z2">
+            <ng-container matColumnDef="Title">
+                <th mat-header-cell *matHeaderCellDef> Title </th>
+                <td mat-cell *matCellDef="let element"> {{element.Title}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="AssignedAssessor">
+                <th mat-header-cell *matHeaderCellDef> Assigned Assessor </th>
+                <td mat-cell *matCellDef="let element"> {{ element.RequestedAssessor?.[0]?.UserName}}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="ReportOwner">
+                <th mat-header-cell *matHeaderCellDef> Report Owner </th>
+                <td mat-cell *matCellDef="let element"> {{element.CreatedByUserName}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Status">
+                <th mat-header-cell *matHeaderCellDef> Status</th>
+                <td mat-cell *matCellDef="let element"> {{element.Status}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="routeToReportDetails(row)"></tr>a
+        </table>
+    </div>
+</div>

@@ -22,9 +22,39 @@ export class ReportService {
     });
   }
 
+  getReportbyId(reportId: string): Observable<any> {
+    return new Observable(observer => {
+      this.http.get<CommonHttpResponse<IReport>>(environment.ApiBaseUrl + `/getReport/${reportId}`).pipe(first()).subscribe(res => {
+        observer.next(res.Data);
+      }, error => {
+        observer.next(error.error);
+      });
+    });
+  }
+
   createReport(data: IReport): Observable<CommonHttpResponse<IReport>> {
     return new Observable(observer => {
       this.http.post<CommonHttpResponse<IReport>>(environment.ApiBaseUrl + '/createReport', data).pipe(first()).subscribe(res => {
+        observer.next(res);
+      }, error => {
+        observer.next(error.error);
+      });
+    });
+  }
+
+  updateReport(data: IReport): Observable<CommonHttpResponse<IReport>> {
+    return new Observable(observer => {
+      this.http.post<CommonHttpResponse<IReport>>(environment.ApiBaseUrl + '/updateReport', data).pipe(first()).subscribe(res => {
+        observer.next(res);
+      }, error => {
+        observer.next(error.error);
+      });
+    });
+  }
+
+  deleteReport(reportId: string): Observable<CommonHttpResponse<IReport>> {
+    return new Observable(observer => {
+      this.http.delete<CommonHttpResponse<IReport>>(environment.ApiBaseUrl + `/deleteReport/${reportId}`).pipe(first()).subscribe(res => {
         observer.next(res);
       }, error => {
         observer.next(error.error);

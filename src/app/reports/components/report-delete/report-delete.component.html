@@ -1,0 +1,15 @@
+<h2 mat-dialog-title>Delete user</h2>
+<mat-dialog-content>
+    Are you sure you want to delete {{data.Title}}?
+</mat-dialog-content>
+<mat-dialog-actions>
+    <div fxLayoutAlign="space-between center" fxFlex>
+        <button mat-button mat-dialog-close>Close</button>
+        <button mat-raised-button color="primary" (click)="deleteReport()" [disabled]="isLoading">
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+                <span>Confirm</span>
+                <mat-spinner diameter="20" *ngIf="isLoading"></mat-spinner>
+            </div>
+        </button>
+    </div>
+</mat-dialog-actions>
