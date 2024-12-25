@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -9,12 +10,13 @@ import { PageNotFoundComponent } from './component/page-not-found/page-not-found
 import { RootDefaultComponent } from './component/root-default/root-default.component';
 import { HttpRequestInterceptor } from './http-interceptor';
 import { routes } from './route';
-import { CommonModule } from '@angular/common';
+import { NotificationBarComponent } from './component/notification-bar/notification-bar.component';
 
 @NgModule({
   declarations: [
     RootDefaultComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    NotificationBarComponent
   ],
   imports: [
     BrowserModule,

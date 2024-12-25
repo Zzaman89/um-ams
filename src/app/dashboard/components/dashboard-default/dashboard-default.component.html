@@ -1,0 +1,61 @@
+<div>
+    <h1>Dashboard</h1>
+
+    <div style="margin-top: 20px;" fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="20">
+        <div fxFlex="40">
+            <mat-card appearance="outlined">
+                <h2 style="padding: 20px">User Breakdown</h2>
+                <div class="user-statistic-graph">
+                    <ngx-charts-advanced-pie-chart [results]="userStatistics" />
+                </div>
+            </mat-card>
+        </div>
+
+        <div fxFlex="30">
+            <mat-card appearance="outlined" style="height: 390px;">
+                <h2 style="padding: 20px">Last 5 reports</h2>
+
+                <mat-list role="list" *ngIf="data &&  data.reports;">
+                    <div *ngFor="let item of data.reports; let i = index;" role="listitem">
+                        <mat-list-item>
+                            <div>
+                                <p style="margin: 0;"><b>{{item.Title}}</b></p>
+                                <p style="margin: 0; font-size: 12px"><b>Author: </b> {{ item.CreatedByUserName}}</p>
+                            </div>
+                        </mat-list-item>
+                        <mat-divider *ngIf="i != data.reports.length - 1" />
+                    </div>
+                </mat-list>
+            </mat-card>
+        </div>
+
+        <div fxFlex="30">
+            <mat-card appearance="outlined" style="height: 390px;">
+                <h2 style="padding: 20px">Recent meetings</h2>
+
+                <mat-list role="list" *ngIf="data &&  data.meetings;">
+                    <div *ngFor="let item of data.meetings; let i = index;" role="listitem">
+                        <mat-list-item>
+                            <div>
+                                <p style="margin: 0;"><b>{{item.Title}}</b></p>
+                                <p style="margin: 0; font-size: 12px"><b>Author: </b> {{ item.CreatedByUserName}}</p>
+                            </div>
+                        </mat-list-item>
+                        <mat-divider *ngIf="i != data.meetings.length - 1" />
+                    </div>
+                </mat-list>
+            </mat-card>
+        </div>
+    </div>
+
+    <div style="margin-top: 20px;">
+        <mat-card appearance="outlined">
+            <h2 style="padding: 20px">Recent reports statistics</h2>
+            <div class="user-statistic-graph">
+                <ngx-charts-line-chart [results]="reportStatistics" [legend]="true" [showXAxisLabel]="true"
+                    [showYAxisLabel]="true" [xAxis]="true" [yAxis]="true"
+                    [xAxisTickFormatting]="reportChartLabelFormatter" />
+            </div>
+        </mat-card>
+    </div>
+</div>

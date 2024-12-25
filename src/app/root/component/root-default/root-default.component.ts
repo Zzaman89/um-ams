@@ -14,12 +14,18 @@ export class RootDefaultComponent implements OnInit {
   currentRoute: string = '/';
   currentUserRoute: string[] = [];
 
+  isNotificationSidebarOpen = false;
+
   constructor(
     private loginService: LoginService,
     private router: Router,
     private route: ActivatedRoute,
     private utilityService: UtilityService
   ) { }
+
+  openNotification(): void {
+    this.isNotificationSidebarOpen = !this.isNotificationSidebarOpen;
+  }
 
   dynamicRouteTitleSetter(): void {
     this.router.events

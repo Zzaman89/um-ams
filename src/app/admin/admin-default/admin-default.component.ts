@@ -11,6 +11,6 @@ export class AdminDefaultComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit(): void {
-    this.router.navigate(['/admin-dashboard/users']);
+    this.router.navigate(['/admin-dashboard/dashboard']);
   }
 }

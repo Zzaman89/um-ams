@@ -52,7 +52,7 @@ export class LoginService {
   getDefaultRouteForRole(role: string): string {
     switch (role) {
       case 'admin':
-        return '/admin-dashboard/users';
+        return '/admin-dashboard/dashboard';
       case 'faculty':
         return '/faculty-dashboard';
       case 'assessor':
@@ -65,7 +65,7 @@ export class LoginService {
   getAvailableRoutesForRole(role: string): Array<string> {
     switch (role) {
       case 'admin':
-        return ['users', 'meetings', 'reports'];
+        return ['dashboard', 'users', 'meetings', 'reports'];
       case 'faculty':
         return ['meetings', 'reports'];
       case 'assessor':
