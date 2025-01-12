@@ -10,6 +10,7 @@ import { ReportDeleteComponent } from './components/report-delete/report-delete.
 import { ReportDetailsComponent } from './components/report-details/report-details.component';
 import { ReportListComponent } from './components/report-list/report-list.component';
 import { ReportUpdateComponent } from './components/report-update/report-update.component';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 
 const routes: Routes = [
@@ -43,7 +44,8 @@ const routes: Routes = [
     FlexLayoutModule,
     MaterialModule,
     ReactiveFormsModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    PdfViewerModule
   ]
 })
 export class ReportsModule { }

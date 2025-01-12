@@ -16,6 +16,9 @@ import { UserService } from '../../../users/services/user.service';
 export class ReportUpdateComponent {
   isLoading: boolean = false;
   users: Array<IUser> = [];
+  file?: File;
+  base64File!: string;
+  fileName?: string;
 
   reportForm = new FormGroup({
     title: new FormControl(this.data.Title, Validators.required),
@@ -30,7 +33,10 @@ export class ReportUpdateComponent {
     private reportService: ReportService,
     private userService: UserService,
     private snackBar: MatSnackBar
-  ) { }
+  ) {
+    this.base64ToFile(this.data.FileLink, this.data.Title);
+    this.fileName = this.data.Title;
+  }
 
   updateReport(): void {
     this.isLoading = true;
@@ -43,7 +49,7 @@ export class ReportUpdateComponent {
         CreatedByUserName: '',
         Description: this.reportForm.value['description'] as string,
         RequestedAssessor: (this.reportForm.value['requestedAssessor'] as unknown as any[]).map(x => { return { UserId: x._id, UserName: x.Name }; }),
-        FileLink: this.reportForm.value['fileLink'] as string,
+        FileLink: this.base64File,
         CreatedDate: new Date(),
         ApprovedDate: new Date(),
         Status: ''
@@ -71,6 +77,62 @@ export class ReportUpdateComponent {
         this.dialogRef.close();
       });
     }
+  }
+
+  onFileSelected(event: any): void {
+    this.file = event.target.files[0];
+
+    if (this.file?.type != 'application/pdf') { return; }
+
+    this.convertFileToBase64(this.file).then((base64: string) => {
+      this.base64File = base64;
+    });
+
+    if (this.file) {
+
+      this.fileName = this.file.name;
+    }
+  }
+
+  onFileRemove(): void {
+    this.file = undefined;
+    this.fileName = undefined;
+
+    const elem: any = document.getElementById('fileUpload');
+
+    if (elem)
+      elem.value = null;
+  }
+
+  convertFileToBase64(file: File): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        if (reader.result) {
+          resolve(reader.result.toString());
+        } else {
+          reject('File could not be read.');
+        }
+      };
+      reader.onerror = () => reject('Error reading file.');
+      reader.readAsDataURL(file);
+    });
+  }
+
+  base64ToFile(base64: string, fileName: string): void {
+    const byteString = atob(base64.split(',')[1]);
+    const mimeString = base64.split(',')[0].match(/:(.*?);/)![1];
+
+    const byteArray = new Uint8Array(byteString.length);
+    for (let i = 0; i < byteString.length; i++) {
+      byteArray[i] = byteString.charCodeAt(i);
+    }
+
+    const blob = new Blob([byteArray], { type: mimeString });
+
+    this.file = new File([blob], fileName, { type: mimeString });
+
+    console.log('File created:', this.file);
   }
 
   ngOnInit(): void {

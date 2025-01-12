@@ -18,16 +18,36 @@
             <textarea matInput formControlName="description"></textarea>
         </mat-form-field>
 
-        <mat-form-field style="width: 100%;">
-            <mat-label>Report File Link</mat-label>
-            <input matInput formControlName="fileLink">
-        </mat-form-field>
+        <div>
+            <mat-label>Report PDF</mat-label>
+            <input id="fileUpload" type="file" accept="application/pdf" class="file-input" #fileUpload
+                (change)="onFileSelected($event)">
+
+            <div class="file-upload">
+
+
+                <span *ngIf="!fileName">{{ "No file uploaded yet."}}</span>
+
+                <mat-chip *ngIf="fileName" (removed)="onFileRemove()">
+                    {{fileName}}
+                    <button matChipRemove>
+                        <mat-icon>cancel</mat-icon>
+                    </button>
+                </mat-chip>
+
+                <button mat-button color="primary" *ngIf="!fileName" class="upload-btn" (click)="fileUpload.click()">
+                    Upload File
+                    <mat-icon>attach_file</mat-icon>
+                </button>
+            </div>
+        </div>
     </form>
 </mat-dialog-content>
 <mat-dialog-actions>
     <div fxLayoutAlign="space-between center" fxFlex>
         <button mat-button mat-dialog-close>Close</button>
-        <button mat-raised-button color="primary" (click)="createReport()" [disabled]="!reportForm.valid || isLoading">
+        <button mat-raised-button color="primary" (click)="createReport()"
+            [disabled]="(!reportForm.valid && !fileName) || isLoading">
             <div fxLayout="row" fxLayoutAlign="space-between center">
                 <span>Create Report</span>
                 <mat-spinner diameter="20" *ngIf="isLoading"></mat-spinner>

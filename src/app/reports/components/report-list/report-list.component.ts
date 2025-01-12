@@ -13,6 +13,7 @@ import { ReportCreateComponent } from '../report-create/report-create.component'
 })
 export class ReportListComponent {
   data: IReport[] = [];
+  totalCount!: number;
   displayedColumns: string[] = ['Title', 'AssignedAssessor', 'ReportOwner', 'Status'];
 
   constructor(
@@ -22,9 +23,10 @@ export class ReportListComponent {
   ) { }
 
 
-  getReports(): void {
-    this.reportService.getReports().pipe(first()).subscribe(res => {
-      this.data = res;
+  getReports(limit: number = 10, skip: number = 0): void {
+    this.reportService.getReports(limit, skip).pipe(first()).subscribe(res => {
+      this.data = res.Data;
+      this.totalCount = res.Total;
     });
   }
 
@@ -44,6 +46,12 @@ export class ReportListComponent {
 
   routeToReportDetails(report: IReport): void {
     this.route.navigate([`/admin-dashboard/reports/${report._id}`])
+  }
+
+  onPageChange(pageConfig: any): void {
+    const pageSize = pageConfig.pageSize;
+    const skip = pageConfig.pageSize * pageConfig.pageIndex;
+    this.getReports(pageSize, skip);
   }
 
   openUpdateReportModal(report: IReport): void {

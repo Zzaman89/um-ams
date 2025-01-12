@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, first } from 'rxjs';
+import { Observable, first, of } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { CommonHttpResponse } from '../../core/common-http-response.model';
-import { IReport } from '../../core/models/report.model';
+import { IReport, IReportList } from '../../core/models/report.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,9 +12,9 @@ export class ReportService {
 
   constructor(private http: HttpClient) { }
 
-  getReports(limit: number = 10, skip: number = 0): Observable<any> {
+  getReports(limit: number = 10, skip: number = 0): Observable<IReportList> {
     return new Observable(observer => {
-      this.http.post<CommonHttpResponse<Array<IReport>>>(environment.ApiBaseUrl + '/getReports', { Limit: limit, Skip: skip }).pipe(first()).subscribe(res => {
+      this.http.post<CommonHttpResponse<IReportList>>(environment.ApiBaseUrl + '/getReports', { Limit: limit, Skip: skip }).pipe(first()).subscribe(res => {
         observer.next(res.Data);
       }, error => {
         observer.next(error.error);
@@ -62,4 +62,7 @@ export class ReportService {
     });
   }
 
+  uploadFile(file: File): Observable<any> {
+    return of([]);
+  }
 }

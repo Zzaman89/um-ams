@@ -13,3 +13,8 @@ export interface IReport {
     FileLink: string;
     Status: string;
 }
+
+export interface IReportList {
+    Data: Array<IReport>
+    Total: number;
+}
