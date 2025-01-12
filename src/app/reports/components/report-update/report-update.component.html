@@ -8,7 +8,7 @@
 
         <mat-form-field style="width: 100%;">
             <mat-label>Assessor</mat-label>
-            <mat-select matNativeControl formControlName="requestedAssessor">
+            <mat-select matNativeControl formControlName="requestedAssessor" [(value)]="selectedAccessor">
                 <mat-option *ngFor="let item of users" [value]="item">{{item.Name}}</mat-option>
             </mat-select>
         </mat-form-field>

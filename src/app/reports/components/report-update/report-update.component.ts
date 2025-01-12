@@ -19,6 +19,7 @@ export class ReportUpdateComponent {
   file?: File;
   base64File!: string;
   fileName?: string;
+  selectedAccessor!: any;
 
   reportForm = new FormGroup({
     title: new FormControl(this.data.Title, Validators.required),
@@ -35,7 +36,6 @@ export class ReportUpdateComponent {
     private snackBar: MatSnackBar
   ) {
     this.base64ToFile(this.data.FileLink, this.data.Title);
-    this.fileName = this.data.Title;
   }
 
   updateReport(): void {
@@ -120,6 +120,7 @@ export class ReportUpdateComponent {
   }
 
   base64ToFile(base64: string, fileName: string): void {
+    if (!this.isBase64(base64)) { return; }
     const byteString = atob(base64.split(',')[1]);
     const mimeString = base64.split(',')[0].match(/:(.*?);/)![1];
 
@@ -131,13 +132,22 @@ export class ReportUpdateComponent {
     const blob = new Blob([byteArray], { type: mimeString });
 
     this.file = new File([blob], fileName, { type: mimeString });
+    this.fileName = fileName;
 
     console.log('File created:', this.file);
+  }
+
+  isBase64(str: string): boolean {
+    // Regular expression to validate Base64 format
+    const base64Regex = /^data:([a-zA-Z0-9]+\/[a-zA-Z0-9-.+]+)?;base64,([a-zA-Z0-9+/=\r\n]+)$/;
+    return base64Regex.test(str);
   }
 
   ngOnInit(): void {
     this.userService.getUsers().pipe(first()).subscribe(res => {
       this.users = res;
+
+      this.selectedAccessor = this.users.find(x => x._id == this.data.RequestedAssessor[0]?.UserId);
     });
   }
 }
