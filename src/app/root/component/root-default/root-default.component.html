@@ -7,8 +7,10 @@
 
         <mat-sidenav-content>
             <mat-toolbar class="header" yPosition="above" fxFlex="100">
+                <ngx-avatars src="./../../../../assets/logo.png" size="35"></ngx-avatars>
+
                 <div fxFlex fxLayoutAlign="space-between center">
-                    <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center">
+                    <div style="padding-left: 20px;" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center">
                         <button mat-stroked-button *ngFor="let item of currentUserRoute"
                             [color]="currentRoute === '/' + item ? 'primary' : ''" (click)="routeTo(item)"
                             [ngClass]="{ 'active-route': '/admin-dashboard/' + item === currentRoute}">{{item}}</button>

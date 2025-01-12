@@ -5,12 +5,13 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
+import { AvatarModule } from 'ngx-avatars';
 import { MaterialModule } from '../shared/material.module';
+import { NotificationBarComponent } from './component/notification-bar/notification-bar.component';
 import { PageNotFoundComponent } from './component/page-not-found/page-not-found.component';
 import { RootDefaultComponent } from './component/root-default/root-default.component';
 import { HttpRequestInterceptor } from './http-interceptor';
 import { routes } from './route';
-import { NotificationBarComponent } from './component/notification-bar/notification-bar.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { NotificationBarComponent } from './component/notification-bar/notificat
     NotificationBarComponent
   ],
   imports: [
+    AvatarModule,
     BrowserModule,
     BrowserAnimationsModule,
     CommonModule,
