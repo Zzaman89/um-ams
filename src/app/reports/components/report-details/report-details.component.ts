@@ -59,7 +59,9 @@ export class ReportDetailsComponent implements OnInit, OnDestroy {
     const ref = this.dialog.open(ReportStatusUpdateComponent, {
       data: {
         ReportId: this.data._id,
-        CurrentStatus: this.data.Status
+        CurrentStatus: this.data.Status,
+        Title: this.data.Title,
+        AccessorId: this.data.RequestedAssessor?.[0]?.UserId
       },
       width: '40vw',
       enterAnimationDuration: '100ms',

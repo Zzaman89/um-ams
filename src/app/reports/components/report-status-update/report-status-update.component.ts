@@ -33,6 +33,9 @@ export class ReportStatusUpdateComponent {
     this.reportSerice.updateReportStatus(this.data.ReportId, this.statusMap[this.status]).pipe(first()).subscribe(res => {
       this.isLoading = false;
 
+
+      this.reportSerice.createNotification(this.data.AccessorId, this.data.ReportId, this.data.Title, 'Status').pipe(first()).subscribe();
+      
       this.dialogRef.close();
     })
   }

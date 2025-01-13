@@ -91,7 +91,6 @@ export class ReportService {
     });
   }
 
-
   createComment(reportId: string, comment: string): Observable<any> {
     return new Observable(observer => {
       const data = {
@@ -100,12 +99,59 @@ export class ReportService {
         Comment: comment,
         UserId: this.loginService.getCookies('user_id'),
         UserName: this.loginService.getCookies('user_name')
-      }
+      };
+
       this.http.post<any>(environment.ApiBaseUrl + `/createComment`, data).pipe(first()).subscribe(res => {
         observer.next(res);
       }, error => {
         observer.next(error.error);
       });
     });
+  }
+
+  createNotification(accessortId: string, reportId: string, title: string, type: string): Observable<any> {
+    return new Observable(observer => {
+      const data = {
+        EntityName: 'Report',
+        EntityId: reportId,
+        NotificationText: this.notificationTextHelper(title, type),
+        UserId: this.loginService.getCookies('user_id'),
+        Permission: [
+          this.loginService.getCookies('user_id'),
+          accessortId
+        ],
+        UserName: this.loginService.getCookies('user_name')
+      };
+
+      this.http.post<any>(environment.ApiBaseUrl + `/createNotification`, data).pipe(first()).subscribe(res => {
+        observer.next(res);
+      }, error => {
+        observer.next(error.error);
+      });
+    });
+  }
+
+  private notificationTextHelper(title: string, type: string): string {
+    let notificationText = '';
+
+    switch (type) {
+      case 'Created':
+        notificationText = `Report '${title}' has been created`;
+        break;
+      case 'Updated':
+        notificationText = `Report '${title}' has been updated`;
+        break;
+      case 'Commented':
+        notificationText = `New comment on report '${title}'`;
+        break;
+      case 'Status':
+        notificationText = `'${title}' reports status has been updated`;
+        break;
+      default:
+        notificationText = '';
+        break;
+    }
+
+    return notificationText;
   }
 }
