@@ -1,3 +1,13 @@
-.notification-items-container {
-    padding: 14px;
+:host {
+    .notification-items-container {
+        padding: 14px;
+    }
+
+    .notification-item-container {
+        border-radius: 6px;
+        border-left: 4px solid #b09c9b;
+        padding: 10px;
+        padding-bottom: 0px;
+        margin-bottom: 14px;
+    }
 }

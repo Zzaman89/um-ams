@@ -1,5 +1,12 @@
 <div class="notification-items-container">
     <h2>Notifications</h2>
 
-    <mat-divider />
+    <mat-divider style="margin-bottom: 10px;" />
+
+    <div class="notification-item-container" *ngFor="let item of data">
+        <p>{{item.NotificationText}}</p>
+
+        <p style="text-align: end; font-size: 10px; font-style: italic;">{{timeAgo(item.Time)}}</p>
+        <mat-divider/>
+    </div>
 </div>
