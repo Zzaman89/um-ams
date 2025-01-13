@@ -72,6 +72,8 @@ export class ReportCreateComponent implements OnInit {
             horizontalPosition: 'right',
             verticalPosition: 'top'
           });
+
+          this.reportService.createNotification(data.RequestedAssessor[0].UserId, data._id, data.Title, 'Created').pipe(first()).subscribe();
         }
 
         this.dialogRef.close();

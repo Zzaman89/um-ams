@@ -39,6 +39,8 @@ export class ReportDetailsComponent implements OnInit, OnDestroy {
   getComments(): void {
     this.reportService.getComments(this.reportId).pipe(first()).subscribe(res => {
       this.comments = res;
+
+      this.reportService.createNotification(this.data.RequestedAssessor[0].UserId, this.reportId, this.data.Title, 'Commented').pipe(first()).subscribe();
     });
   }
 

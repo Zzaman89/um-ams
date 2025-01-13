@@ -75,6 +75,8 @@ export class ReportUpdateComponent {
             horizontalPosition: 'right',
             verticalPosition: 'top'
           });
+
+          this.reportService.createNotification(updatedData.RequestedAssessor[0].UserId, this.data._id, updatedData.Title, 'Updated').pipe(first()).subscribe();
         }
 
         this.dialogRef.close();
