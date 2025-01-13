@@ -5,9 +5,16 @@
 
     .notification-item-container {
         border-radius: 6px;
-        border-left: 4px solid #b09c9b;
         padding: 10px;
         padding-bottom: 0px;
         margin-bottom: 14px;
+    }
+
+    .meeting-border {
+        border-left: 4px solid #809baa;
+    }
+
+    .report-border {
+        border-left: 4px solid #b09c9b;
     }
 }

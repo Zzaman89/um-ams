@@ -67,6 +67,8 @@ export class MeetingCreateComponent implements OnInit {
             horizontalPosition: 'right',
             verticalPosition: 'top'
           });
+
+          this.meetingService.createNotification(data.InvitedUsers.map(x => x.UserId), res.Data._id, data.Title).pipe(first()).subscribe();
         }
 
         this.dialogRef.close();

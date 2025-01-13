@@ -3,10 +3,11 @@
 
     <mat-divider style="margin-bottom: 10px;" />
 
-    <div class="notification-item-container" *ngFor="let item of data">
+    <div class="notification-item-container" *ngFor="let item of data"
+        [ngClass]="{ 'report-border' : item.EntityName == 'Report', 'meeting-border': item.EntityName == 'Meeting'}">
         <p>{{item.NotificationText}}</p>
 
         <p style="text-align: end; font-size: 10px; font-style: italic;">{{timeAgo(item.Time)}}</p>
-        <mat-divider/>
+        <mat-divider />
     </div>
 </div>
