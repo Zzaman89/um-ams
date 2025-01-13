@@ -19,17 +19,60 @@
         </div>
 
         <div>
-            <button mat-icon-button color="primary" (click)="updateReport()">
-                <mat-icon>edit</mat-icon>
-            </button>
-            <button mat-icon-button color="warn" (click)="deleteReport()">
-                <mat-icon>delete</mat-icon>
-            </button>
+            <div fxFlex fxLayout="row" fxLayoutAlign="star center" fxLayoutGap="10">
+                <button mat-button color="primary" (click)="updateReportStatus()">
+                    Update report status
+                </button>
+                <button mat-icon-button color="primary" (click)="updateReport()">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button color="warn" (click)="deleteReport()">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </div>
         </div>
     </div>
 
     <mat-divider></mat-divider>
 
-    <pdf-viewer [src]="data.FileLink" [render-text]="true" [original-size]="false"
-        style="width: 100%; height: 500px;"></pdf-viewer>
+    <div style="margin-top: 20px; margin-bottom: 20px;">
+        <pdf-viewer [src]="data.FileLink" [render-text]="true" [original-size]="false"
+            style="width: 100%; height: 650px;"></pdf-viewer>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <div style="margin-top: 20px;">
+        <h2>Discussion</h2>
+
+        <mat-form-field style="width: 100%;">
+            <mat-label>Leave a comment</mat-label>
+            <textarea matInput [(ngModel)]="comment"></textarea>
+        </mat-form-field>
+
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+            <div></div>
+            <button mat-flat-button color="primary" (click)="createComment()"
+                [disabled]="comment.length <= 0 || isCommentLoading">
+                Comment
+            </button>
+        </div>
+
+        <p style="font-style: italic; color: grey; font-weight: bold;">Replies</p>
+
+        <div>
+            <div style="margin-bottom: 10px;" *ngFor="let comment of comments;">
+                <div fxLayout="row" fxLayoutAling="start start" fxLayoutGap="20px">
+                    <ngx-avatars [size]="40" [name]="comment.UserName" size="25"></ngx-avatars>
+                    <div>
+                        <p style="font-size: 18px; font-weight: bold; padding:0; margin-bottom: 5px;">{{comment.UserName}}</p>
+                        <p style="color: grey; font-style: italic; padding: 0;">{{timeAgo(comment.Time)}}</p>
+                    </div>
+                </div>
+
+                <p>{{comment.Comment}}</p>
+                <mat-divider />
+            </div>
+        </div>
+    </div>
 </div>

@@ -1,0 +1,25 @@
+<h2 mat-dialog-title>Status update</h2>
+<mat-dialog-content>
+    <p>Select the appropriate status for the report to send a notification for both the accessor and the person who
+        submitted it</p>
+    <mat-form-field style="width: 100%;">
+        <mat-label>Report status</mat-label>
+        <mat-select [(ngModel)]="status">
+            <mat-option value="1">Send for verfication</mat-option>
+            <mat-option value="2">Rejected</mat-option>
+            <mat-option value="3">Accepted</mat-option>
+        </mat-select>
+    </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <div fxLayoutAlign="space-between center" fxFlex>
+        <button mat-button mat-dialog-close>Close</button>
+        <button mat-raised-button color="primary" (click)="updateReportStatus()" [disabled]="isLoading">
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+                <span>Update Status</span>
+                <mat-spinner diameter="20" *ngIf="isLoading"></mat-spinner>
+            </div>
+        </button>
+    </div>
+</mat-dialog-actions>

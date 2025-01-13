@@ -1,16 +1,18 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { AvatarModule } from 'ngx-avatars';
 import { MaterialModule } from '../shared/material.module';
 import { ReportCreateComponent } from './components/report-create/report-create.component';
 import { ReportDefaultComponent } from './components/report-default/report-default.component';
 import { ReportDeleteComponent } from './components/report-delete/report-delete.component';
 import { ReportDetailsComponent } from './components/report-details/report-details.component';
 import { ReportListComponent } from './components/report-list/report-list.component';
+import { ReportStatusUpdateComponent } from './components/report-status-update/report-status-update.component';
 import { ReportUpdateComponent } from './components/report-update/report-update.component';
-import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 
 const routes: Routes = [
@@ -37,12 +39,15 @@ const routes: Routes = [
     ReportCreateComponent,
     ReportDetailsComponent,
     ReportDeleteComponent,
-    ReportUpdateComponent
+    ReportUpdateComponent,
+    ReportStatusUpdateComponent
   ],
   imports: [
+    AvatarModule,
     CommonModule,
     FlexLayoutModule,
     MaterialModule,
+    FormsModule,
     ReactiveFormsModule,
     RouterModule.forChild(routes),
     PdfViewerModule

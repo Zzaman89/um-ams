@@ -4,13 +4,18 @@ import { Observable, first, of } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { CommonHttpResponse } from '../../core/common-http-response.model';
 import { IReport, IReportList } from '../../core/models/report.model';
+import { IComment } from '../../core/models/comment.model';
+import { LoginService } from '../../login/services/login.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReportService {
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private loginService: LoginService
+  ) { }
 
   getReports(limit: number = 10, skip: number = 0): Observable<IReportList> {
     return new Observable(observer => {
@@ -62,7 +67,45 @@ export class ReportService {
     });
   }
 
-  uploadFile(file: File): Observable<any> {
-    return of([]);
+  updateReportStatus(reportId: string, status: string): Observable<any> {
+    return new Observable(observer => {
+      const data = {
+        _id: reportId,
+        Status: status
+      }
+      this.http.post<any>(environment.ApiBaseUrl + `/updateReportStatus`, data).pipe(first()).subscribe(res => {
+        observer.next(res);
+      }, error => {
+        observer.next(error.error);
+      });
+    });
+  }
+
+  getComments(reportId: string): Observable<Array<IComment>> {
+    return new Observable(observer => {
+      this.http.get<CommonHttpResponse<Array<IComment>>>(environment.ApiBaseUrl + `/getComments/${reportId}`).pipe(first()).subscribe(res => {
+        observer.next(res.Data);
+      }, error => {
+        observer.next(error.error);
+      });
+    });
+  }
+
+
+  createComment(reportId: string, comment: string): Observable<any> {
+    return new Observable(observer => {
+      const data = {
+        EntityName: 'Report',
+        EntityId: reportId,
+        Comment: comment,
+        UserId: this.loginService.getCookies('user_id'),
+        UserName: this.loginService.getCookies('user_name')
+      }
+      this.http.post<any>(environment.ApiBaseUrl + `/createComment`, data).pipe(first()).subscribe(res => {
+        observer.next(res);
+      }, error => {
+        observer.next(error.error);
+      });
+    });
   }
 }

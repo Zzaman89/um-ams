@@ -50,11 +50,13 @@ export class LoginDefaultComponent {
 
         const userInfo = this.loginService.getDecodedAccessToken(accessToken);
         const userId = userInfo.data.id;
+        const userName = userInfo.data.Name;
         const role = userInfo.data.Role;
         const isApplicationUser = userId && role ? true : false;
         const defaultRoute = this.loginService.getDefaultRouteForRole(role);
 
         this.loginService.setCookie('user_id', userId);
+        this.loginService.setCookie('user_name', userName);
 
         if (isApplicationUser) {
           this.router.navigate([defaultRoute]);

@@ -48,7 +48,10 @@ export class ReportUpdateComponent {
         CreatedByUserId: '',
         CreatedByUserName: '',
         Description: this.reportForm.value['description'] as string,
-        RequestedAssessor: (this.reportForm.value['requestedAssessor'] as unknown as any[]).map(x => { return { UserId: x._id, UserName: x.Name }; }),
+        RequestedAssessor: [{
+          UserId: (this.reportForm.value['requestedAssessor'] as unknown as IUser)._id,
+          UserName: (this.reportForm.value['requestedAssessor'] as unknown as IUser).Name
+        }],
         FileLink: this.base64File,
         CreatedDate: new Date(),
         ApprovedDate: new Date(),

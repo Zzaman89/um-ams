@@ -78,6 +78,7 @@ export class LoginService {
   logout(): void {
     this.setCookie("access_token", "");
     this.setCookie("user_id", "");
+    this.setCookie("user_name", "");
 
     localStorage.setItem('access_token', "");
 
