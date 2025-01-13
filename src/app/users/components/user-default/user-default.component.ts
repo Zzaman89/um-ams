@@ -14,6 +14,7 @@ import { UserDeleteComponent } from '../user-delete/user-delete.component';
 })
 export class UserDefaultComponent implements OnInit {
   data: IUser[] = [];
+  totalCount!: number;
   displayedColumns: string[] = ['Name', 'Email', 'Role', 'Actions'];
 
   constructor(
@@ -21,9 +22,10 @@ export class UserDefaultComponent implements OnInit {
     public dialog: MatDialog
   ) { }
 
-  getUsers(): void {
-    this.userService.getUsers().pipe(first()).subscribe(res => {
-      this.data = res;
+  getUsers(limit: number = 10, skip: number = 0): void {
+    this.userService.getUsers(limit, skip).pipe(first()).subscribe(res => {
+      this.data = res.Data;
+      this.totalCount = res.Total
     });
   }
 
@@ -64,6 +66,12 @@ export class UserDefaultComponent implements OnInit {
     ref.afterClosed().subscribe(_ => {
       this.getUsers();
     });
+  }
+
+  onPageChange(pageConfig: any): void {
+    const pageSize = pageConfig.pageSize;
+    const skip = pageConfig.pageSize * pageConfig.pageIndex;
+    this.getUsers(pageSize, skip);
   }
 
   ngOnInit(): void {

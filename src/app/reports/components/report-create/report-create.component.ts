@@ -123,7 +123,7 @@ export class ReportCreateComponent implements OnInit {
 
   ngOnInit(): void {
     this.userService.getUsers().pipe(first()).subscribe(res => {
-      this.users = res;
+      this.users = res.Data;
     });
   }
 }

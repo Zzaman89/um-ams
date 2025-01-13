@@ -150,7 +150,7 @@ export class ReportUpdateComponent {
 
   ngOnInit(): void {
     this.userService.getUsers().pipe(first()).subscribe(res => {
-      this.users = res;
+      this.users = res.Data;
 
       this.selectedAccessor = this.users.find(x => x._id == this.data.RequestedAssessor[0]?.UserId);
     });

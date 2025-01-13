@@ -5,3 +5,8 @@ export interface IUser {
     Role: string;
     IsSystemBlocked: boolean;
 }
+
+export interface IUserList {
+    Data: Array<IUser>
+    Total: number;
+}
